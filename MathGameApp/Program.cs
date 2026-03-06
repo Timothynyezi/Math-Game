@@ -101,7 +101,8 @@ void PlayGame(string operation, List<GameRecord> history)
 
         Console.Write($"Question {i}: {firstNumber} {symbol} {secondNumber} =");
 
-        int playerAnswer; 
+        int playerAnswer;
+        bool isValidInput = int.TryParse(Console.ReadLine(), out playerAnswer); 
     }
 }
 
