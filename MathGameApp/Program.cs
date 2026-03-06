@@ -46,7 +46,7 @@ while (isRunning)
             ShowGoodby();
             break;
         default:
-            Console.WriteLine("Invalid option. Please try again.");
+            Console.WriteLine("\n Invalid option. Please choose 0 -5.");
             Console.ReadKey();
             break;
     }
