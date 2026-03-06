@@ -100,6 +100,8 @@ void PlayGame(string operation, List<GameRecord> history)
         };
 
         Console.Write($"Question {i}: {firstNumber} {symbol} {secondNumber} =");
+
+        int playerAnswer; 
     }
 }
 
