@@ -5,6 +5,8 @@ List<GameRecord> gameHistory = new List<GameRecord>();
 
 bool isRunning = true;
 
+ShowWelcome();
+
 while (isRunning)
 {
     Console.Clear();
@@ -20,7 +22,7 @@ while (isRunning)
     Console.WriteLine("------------------------------");
     Console.Write("Choose an option: ");
 
-    string choice = Console.ReadLine();
+    string choice = Console.ReadLine()?.Trim();
 
     switch (choice)
     {
