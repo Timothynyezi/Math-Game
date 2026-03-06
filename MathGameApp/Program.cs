@@ -120,6 +120,9 @@ void PlayGame(string operation, List<GameRecord> history)
             Console.WriteLine($"Wrong! The answer was {correctAnswer}\n");
         }
     }
+    Console.WriteLine("==============================");
+    Console.WriteLine($"Game Over! You scored {score} out of {totalQuestions}");
+    Console.WriteLine("==============================");
 }
 
 void ShowHistory(List<GameRecord> history)
