@@ -1,0 +1,15 @@
+/home/thami/Desktop/C#/Math-Game/MathGameApp/bin/Debug/net10.0/MathGameApp
+/home/thami/Desktop/C#/Math-Game/MathGameApp/bin/Debug/net10.0/MathGameApp.deps.json
+/home/thami/Desktop/C#/Math-Game/MathGameApp/bin/Debug/net10.0/MathGameApp.runtimeconfig.json
+/home/thami/Desktop/C#/Math-Game/MathGameApp/bin/Debug/net10.0/MathGameApp.dll
+/home/thami/Desktop/C#/Math-Game/MathGameApp/bin/Debug/net10.0/MathGameApp.pdb
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.AssemblyInfoInputs.cache
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.AssemblyInfo.cs
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.csproj.CoreCompileInputs.cache
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.sourcelink.json
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.dll
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/refint/MathGameApp.dll
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.pdb
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/MathGameApp.genruntimeconfig.cache
+/home/thami/Desktop/C#/Math-Game/MathGameApp/obj/Debug/net10.0/ref/MathGameApp.dll
