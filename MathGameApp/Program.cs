@@ -47,6 +47,7 @@ while (isRunning)
             break;
         default:
             Console.WriteLine("\n Invalid option. Please choose 0 -5.");
+            Thread.Sleep(1500);
             Console.ReadKey();
             break;
     }
