@@ -109,6 +109,12 @@ void PlayGame(string operation, List<GameRecord> history)
             Console.Write("Please enter a valid number: ");
             isValidInput = int.TryParse(Console.ReadLine(), out playerAnswer);
         }
+
+        if (playerAnswer == correctAnswer)
+        {
+            score++;
+            Console.WriteLine("Correct!\n");
+        }
     }
 }
 
