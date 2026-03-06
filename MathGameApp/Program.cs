@@ -98,6 +98,8 @@ void PlayGame(string operation, List<GameRecord> history)
             "Division"      => "/",
             _               => "?"
         };
+
+        Console.Write($"Question {i}: {firstNumber} {symbol} {secondNumber} =");
     }
 }
 
