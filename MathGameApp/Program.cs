@@ -43,7 +43,7 @@ while (isRunning)
             break;
         case "0":
             isRunning = false;
-            Console.WriteLine("Thanks for playing. Goodbye!");
+            ShowGoodby();
             break;
         default:
             Console.WriteLine("Invalid option. Please try again.");
