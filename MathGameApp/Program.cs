@@ -1,10 +1,12 @@
-﻿
-using System.Security.Cryptography;
+﻿// Program.cs
 
+// ============================================================
+// GAME HISTORY LIST & APP ENTRY POINT
+// ============================================================
 List<GameRecord> gameHistory = new List<GameRecord>();
-
 bool isRunning = true;
 
+// Show a welcome screen once when the app first launches
 ShowWelcome();
 
 while (isRunning)
@@ -13,16 +15,16 @@ while (isRunning)
     Console.WriteLine("==============================");
     Console.WriteLine("       MATH GAME MENU         ");
     Console.WriteLine("==============================");
-    Console.WriteLine("1. Addition (+)");
-    Console.WriteLine("2. Subtraction (-)");
-    Console.WriteLine("3. Multiplication (x)");
-    Console.WriteLine("4. Division (/)");
-    Console.WriteLine("5. View Game History");
-    Console.WriteLine("0. Exit");
+    Console.WriteLine("  1. Addition       (+)");
+    Console.WriteLine("  2. Subtraction    (-)");
+    Console.WriteLine("  3. Multiplication (x)");
+    Console.WriteLine("  4. Division       (/)");
+    Console.WriteLine("  5. View Game History");
+    Console.WriteLine("  0. Exit");
     Console.WriteLine("------------------------------");
-    Console.Write("Choose an option: ");
+    Console.Write("  Choose an option: ");
 
-    string choice = Console.ReadLine()?.Trim();
+    string choice = Console.ReadLine()?.Trim(); // ?. safely handles null
 
     switch (choice)
     {
@@ -43,16 +45,20 @@ while (isRunning)
             break;
         case "0":
             isRunning = false;
-            ShowGoodby();
+            ShowGoodbye();
             break;
         default:
-            Console.WriteLine("\n Invalid option. Please choose 0 -5.");
-            Thread.Sleep(1500);
-            Console.ReadKey();
+            // Instead of freezing, show a clear message and auto-continue
+            Console.WriteLine("\n Invalid option. Please choose 0 - 5.");
+            Thread.Sleep(1500); // Pause for 1.5 seconds then loop again
             break;
     }
 }
 
+// ============================================================
+// WELCOME SCREEN
+// Shown once at app startup
+// ============================================================
 void ShowWelcome()
 {
     Console.Clear();
@@ -64,10 +70,14 @@ void ShowWelcome()
     Console.WriteLine("  Try all 4 operations.");
     Console.WriteLine("------------------------------");
     Console.WriteLine("  Press any key to start...");
-    Console.ReadKey(); 
+    Console.ReadKey();
 }
 
-void ShowGoodby() 
+// ============================================================
+// GOODBYE SCREEN
+// Shown when user exits
+// ============================================================
+void ShowGoodbye()
 {
     Console.Clear();
     Console.WriteLine("==============================");
@@ -99,20 +109,22 @@ void ShowGoodby()
     Thread.Sleep(2500); // Show goodbye screen for 2.5 seconds before closing
 }
 
+// ============================================================
+// PLAYGAME METHOD — with null safety and better feedback
+// ============================================================
 void PlayGame(string operation, List<GameRecord> history)
 {
     Console.Clear();
 
     Random random = new Random();
-
     int totalQuestions = 5;
     int score = 0;
 
-    Console.WriteLine("===============================");
+    Console.WriteLine("==============================");
     Console.WriteLine($"       {operation.ToUpper()} GAME");
-    Console.WriteLine("===============================");
-    Console.WriteLine($"Answer {totalQuestions} questions. Good luck!\n");
-    
+    Console.WriteLine("==============================");
+    Console.WriteLine($"  Answer {totalQuestions} questions. Good luck!\n");
+
     for (int i = 1; i <= totalQuestions; i++)
     {
         int firstNumber;
@@ -132,31 +144,44 @@ void PlayGame(string operation, List<GameRecord> history)
 
             correctAnswer = operation switch
             {
-                "Addition"      => firstNumber + secondNumber,
-                "Subtraction"   => firstNumber - secondNumber,
-                "Multiplication"=> firstNumber * secondNumber,
+                "Addition"       => firstNumber + secondNumber,
+                "Subtraction"    => firstNumber - secondNumber,
+                "Multiplication" => firstNumber * secondNumber,
                 _                => 0
             };
         }
 
         string symbol = operation switch
         {
-            "Addition"      => "+",
-            "Subtraction"   => "-",
-            "Multiplication"=> "*",
-            "Division"      => "/",
-            _               => "?"
+            "Addition"       => "+",
+            "Subtraction"    => "-",
+            "Multiplication" => "x",
+            "Division"       => "/",
+            _                => "?"
         };
 
-        Console.Write($"Question {i}: {firstNumber} {symbol} {secondNumber} =");
+        // Display progress indicator so player knows how far they are
+        Console.WriteLine($"  --- Question {i} of {totalQuestions} ---");
+        Console.Write($"  {firstNumber} {symbol} {secondNumber} = ");
 
+        // --------------------------------------------------------
+        // NULL-SAFE INPUT HANDLING
+        // Console.ReadLine() can return null if the input stream
+        // ends unexpectedly. The '?.' operator (null-conditional)
+        // safely calls .Trim() only if the string is not null.
+        // If it IS null, the whole expression returns null instead
+        // of throwing a NullReferenceException (crash).
+        // --------------------------------------------------------
         int playerAnswer;
-        bool isValidInput = int.TryParse(Console.ReadLine(), out playerAnswer); 
+        string input = Console.ReadLine()?.Trim();
+        bool isValidInput = int.TryParse(input, out playerAnswer);
 
+        // Keep asking until we get a valid whole number
         while (!isValidInput)
         {
-            Console.Write("Please enter a valid number: ");
-            isValidInput = int.TryParse(Console.ReadLine(), out playerAnswer);
+            Console.Write("Please enter a whole number: ");
+            input = Console.ReadLine()?.Trim();
+            isValidInput = int.TryParse(input, out playerAnswer);
         }
 
         if (playerAnswer == correctAnswer)
@@ -169,18 +194,73 @@ void PlayGame(string operation, List<GameRecord> history)
             Console.WriteLine($"Wrong! The answer was {correctAnswer}\n");
         }
     }
-    Console.WriteLine("==============================");
-    Console.WriteLine($"Game Over! You scored {score} out of {totalQuestions}");
-    Console.WriteLine("==============================");
 
+    // --------------------------------------------------------
+    // RESULTS SCREEN
+    // Show score and a performance message based on how they did.
+    // --------------------------------------------------------
+    ShowResults(operation, score, totalQuestions);
+
+    // Save completed game to history
     GameRecord record = new GameRecord(operation, score, totalQuestions);
     history.Add(record);
 
-    Console.WriteLine("Result saved to history.");
-    Console.WriteLine("\nPress any key to return to the menu...");
+    Console.WriteLine("\n  Press any key to return to the menu...");
     Console.ReadKey();
 }
 
+// ============================================================
+// SHOW RESULTS — displayed after each game
+// ============================================================
+void ShowResults(string operation, int score, int total)
+{
+    Console.WriteLine("==============================");
+    Console.WriteLine("           RESULTS            ");
+    Console.WriteLine("==============================");
+    Console.WriteLine($"  Operation : {operation}");
+    Console.WriteLine($"  Score     : {score} / {total}");
+    Console.WriteLine($"  Rating    : {GetRating(score, total)}");
+    Console.WriteLine($"  {GetPerformanceMessage(score, total)}");
+    Console.WriteLine("==============================");
+}
+
+// ============================================================
+// GET RATING — converts a score into a star rating string.
+// This is a pure helper method — it takes inputs and returns
+// a value without modifying anything else in the app.
+// ============================================================
+string GetRating(int score, int total)
+{
+    // Calculate percentage as a decimal (double for precision)
+    // We cast score to double first — otherwise int/int = int
+    // and decimals get lost. Example: 3/5 = 0 as int, 0.6 as double.
+    double percentage = (double)score / total * 100;
+
+    // Return a star rating based on percentage
+    if (percentage == 100) return "Perfect!";
+    if (percentage >= 80)  return "Great!";
+    if (percentage >= 60)  return "Good";
+    if (percentage >= 40)  return "Keep Practising";
+                           return "Keep Trying!";
+}
+
+// ============================================================
+// GET PERFORMANCE MESSAGE — an encouraging message per score
+// ============================================================
+string GetPerformanceMessage(int score, int total)
+{
+    double percentage = (double)score / total * 100;
+
+    if (percentage == 100) return "Flawless! You got every question right!";
+    if (percentage >= 80)  return "Nearly perfect — great job!";
+    if (percentage >= 60)  return "Solid effort — keep it up!";
+    if (percentage >= 40)  return "You're getting there — practice makes perfect!";
+                           return "Don't give up — try again!";
+}
+
+// ============================================================
+// SHOW HISTORY — updated to include rating column
+// ============================================================
 void ShowHistory(List<GameRecord> history)
 {
     Console.Clear();
@@ -188,31 +268,44 @@ void ShowHistory(List<GameRecord> history)
     Console.WriteLine("        GAME HISTORY          ");
     Console.WriteLine("==============================");
 
-    
     if (history.Count == 0)
     {
-        Console.WriteLine("No games played yet.");
+        Console.WriteLine("  No games played yet.");
+        Console.WriteLine("  Play a game first then come back!");
     }
     else
     {
-        foreach (GameRecord record in history)
+        // Show total games played as a header
+        Console.WriteLine($"  Total games played: {history.Count}\n");
+
+        // 'index' tracks the game number for display purposes.
+        // We use a regular 'for' loop here (instead of foreach)
+        // because we need the position/index of each item.
+        for (int i = 0; i < history.Count; i++)
         {
-            Console.WriteLine($"Date     : {record.DatePlayed:dd MMM yyyy HH:mm}");
-            Console.WriteLine($"Operation: {record.Operation}");
-            Console.WriteLine($"Score    : {record.Score} / {record.TotalQuestions}");
-            Console.WriteLine("------------------------------");
+            GameRecord record = history[i]; // Access item by index like an array
+
+            Console.WriteLine($"  Game #{i + 1}");  // i + 1 so it shows 1, not 0
+            Console.WriteLine($"  Date      : {record.DatePlayed:dd MMM yyyy HH:mm}");
+            Console.WriteLine($"  Operation : {record.Operation}");
+            Console.WriteLine($"  Score     : {record.Score} / {record.TotalQuestions}");
+            Console.WriteLine($"  Rating    : {GetRating(record.Score, record.TotalQuestions)}");
+            Console.WriteLine("  ----------------------------");
         }
     }
 
+    Console.WriteLine("\n  Press any key to return to the menu...");
     Console.ReadKey();
 }
 
-
+// ============================================================
+// GAMERECORD CLASS — unchanged from Step 2
+// ============================================================
 class GameRecord
 {
-    public string Operation { get; set; }   
-    public int Score { get; set; }          
-    public int TotalQuestions { get; set; } 
+    public string Operation { get; set; }
+    public int Score { get; set; }
+    public int TotalQuestions { get; set; }
     public DateTime DatePlayed { get; set; }
 
     public GameRecord(string operation, int score, int totalQuestions)
@@ -220,6 +313,6 @@ class GameRecord
         Operation = operation;
         Score = score;
         TotalQuestions = totalQuestions;
-        DatePlayed = DateTime.Now; 
+        DatePlayed = DateTime.Now;
     }
 }
