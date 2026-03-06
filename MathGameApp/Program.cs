@@ -115,6 +115,10 @@ void PlayGame(string operation, List<GameRecord> history)
             score++;
             Console.WriteLine("Correct!\n");
         }
+        else
+        {
+            Console.WriteLine($"Wrong! The answer was {correctAnswer}\n");
+        }
     }
 }
 
