@@ -53,6 +53,20 @@ while (isRunning)
     }
 }
 
+void ShowWelcome()
+{
+    Console.Clear();
+    Console.WriteLine("==============================");
+    Console.WriteLine("      WELCOME TO MATH GAME    ");
+    Console.WriteLine("==============================");
+    Console.WriteLine("  Test your math skills!");
+    Console.WriteLine("  Answer 5 questions per game.");
+    Console.WriteLine("  Try all 4 operations.");
+    Console.WriteLine("------------------------------");
+    Console.WriteLine("  Press any key to start...");
+    Console.ReadKey(); 
+}
+
 void PlayGame(string operation, List<GameRecord> history)
 {
     Console.Clear();
