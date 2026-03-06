@@ -123,6 +123,13 @@ void PlayGame(string operation, List<GameRecord> history)
     Console.WriteLine("==============================");
     Console.WriteLine($"Game Over! You scored {score} out of {totalQuestions}");
     Console.WriteLine("==============================");
+
+    GameRecord record = new GameRecord(operation, score, totalQuestions);
+    history.Add(record);
+
+    Console.WriteLine("Result saved to history.");
+    Console.WriteLine("\nPress any key to return to the menu...");
+    Console.ReadKey();
 }
 
 void ShowHistory(List<GameRecord> history)
