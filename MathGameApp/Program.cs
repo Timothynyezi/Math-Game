@@ -1,4 +1,6 @@
 ﻿
+using System.Security.Cryptography;
+
 List<GameRecord> gameHistory = new List<GameRecord>();
 
 bool isRunning = true;
@@ -62,7 +64,41 @@ void PlayGame(string operation, List<GameRecord> history)
     Console.WriteLine("===============================");
     Console.WriteLine($"Answer {totalQuestions} questions. Good luck!\n");
     
-    
+    for (int i = 1; i <= totalQuestions; i++)
+    {
+        int firstNumber;
+        int secondNumber;
+        int correctAnswer;
+
+        if (operation == "Division")
+        {
+            correctAnswer = random.Next(1, 11);
+            secondNumber = random.Next(1, 11);
+            firstNumber = correctAnswer * secondNumber;
+        }
+        else
+        {
+            firstNumber = random.Next(1, 21);
+            secondNumber = random.Next(1, 21);
+
+            correctAnswer = operation switch
+            {
+                "Addition"      => firstNumber + secondNumber,
+                "Subtraction"   => firstNumber - secondNumber,
+                "Multiplication"=> firstNumber * secondNumber,
+                _                => 0
+            };
+        }
+
+        string symbol = operation switch
+        {
+            "Addition"      => "+",
+            "Subtraction"   => "-",
+            "Multiplication"=> "*",
+            "Division"      => "/",
+            _               => "?"
+        };
+    }
 }
 
 void ShowHistory(List<GameRecord> history)
