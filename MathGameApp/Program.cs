@@ -67,6 +67,38 @@ void ShowWelcome()
     Console.ReadKey(); 
 }
 
+void ShowGoodby() 
+{
+    Console.Clear();
+    Console.WriteLine("==============================");
+    Console.WriteLine("        THANKS FOR PLAYING    ");
+    Console.WriteLine("==============================");
+
+    // Show a summary of all games played this session
+    if (gameHistory.Count > 0)
+    {
+        Console.WriteLine($"  Games played  : {gameHistory.Count}");
+
+        // LINQ — a powerful way to query collections.
+        // Here we sum all scores across every game record.
+        // We'll explain LINQ more as we use it going forward.
+        int totalScore = 0;
+        int totalPossible = 0;
+
+        foreach (GameRecord r in gameHistory)
+        {
+            totalScore += r.Score;           // += adds to the existing value
+            totalPossible += r.TotalQuestions;
+        }
+
+        Console.WriteLine($"  Total score   : {totalScore} / {totalPossible}");
+        Console.WriteLine($"  Keep practising every day!");
+    }
+
+    Console.WriteLine("==============================");
+    Thread.Sleep(2500); // Show goodbye screen for 2.5 seconds before closing
+}
+
 void PlayGame(string operation, List<GameRecord> history)
 {
     Console.Clear();
