@@ -51,14 +51,7 @@ while (isRunning)
 void PlayGame(string operation, List<GameRecord> history)
 {
     Console.Clear();
-    Console.WriteLine($"Starting {operation} game...");
-    Console.WriteLine("(Game logic coming in Step 3)");
-
-    GameRecord record = new GameRecord(operation, 3, 5);
-    history.Add(record);
-
-    Console.WriteLine($"Test record saved for {operation}.");
-    Console.ReadKey();
+    
 }
 
 void ShowHistory(List<GameRecord> history)
