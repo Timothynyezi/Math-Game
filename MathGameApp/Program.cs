@@ -1,12 +1,7 @@
-﻿// Program.cs
-
-// ============================================================
-// GAME HISTORY LIST & APP ENTRY POINT
-// ============================================================
+﻿
 List<GameRecord> gameHistory = new List<GameRecord>();
 bool isRunning = true;
 
-// Show a welcome screen once when the app first launches
 ShowWelcome();
 
 while (isRunning)
@@ -48,17 +43,13 @@ while (isRunning)
             ShowGoodbye();
             break;
         default:
-            // Instead of freezing, show a clear message and auto-continue
+            
             Console.WriteLine("\n Invalid option. Please choose 0 - 5.");
-            Thread.Sleep(1500); // Pause for 1.5 seconds then loop again
+            Thread.Sleep(1500); 
             break;
     }
 }
 
-// ============================================================
-// WELCOME SCREEN
-// Shown once at app startup
-// ============================================================
 void ShowWelcome()
 {
     Console.Clear();
@@ -73,10 +64,6 @@ void ShowWelcome()
     Console.ReadKey();
 }
 
-// ============================================================
-// GOODBYE SCREEN
-// Shown when user exits
-// ============================================================
 void ShowGoodbye()
 {
     Console.Clear();
@@ -84,20 +71,17 @@ void ShowGoodbye()
     Console.WriteLine("        THANKS FOR PLAYING    ");
     Console.WriteLine("==============================");
 
-    // Show a summary of all games played this session
     if (gameHistory.Count > 0)
     {
         Console.WriteLine($"  Games played  : {gameHistory.Count}");
 
-        // LINQ — a powerful way to query collections.
-        // Here we sum all scores across every game record.
-        // We'll explain LINQ more as we use it going forward.
+       
         int totalScore = 0;
         int totalPossible = 0;
 
         foreach (GameRecord r in gameHistory)
         {
-            totalScore += r.Score;           // += adds to the existing value
+            totalScore += r.Score;         
             totalPossible += r.TotalQuestions;
         }
 
@@ -106,12 +90,9 @@ void ShowGoodbye()
     }
 
     Console.WriteLine("==============================");
-    Thread.Sleep(2500); // Show goodbye screen for 2.5 seconds before closing
+    Thread.Sleep(2500); 
 }
 
-// ============================================================
-// PLAYGAME METHOD — with null safety and better feedback
-// ============================================================
 void PlayGame(string operation, List<GameRecord> history)
 {
     Console.Clear();
@@ -160,23 +141,22 @@ void PlayGame(string operation, List<GameRecord> history)
             _                => "?"
         };
 
-        // Display progress indicator so player knows how far they are
+        
         Console.WriteLine($"  --- Question {i} of {totalQuestions} ---");
         Console.Write($"  {firstNumber} {symbol} {secondNumber} = ");
 
-        // --------------------------------------------------------
         // NULL-SAFE INPUT HANDLING
         // Console.ReadLine() can return null if the input stream
         // ends unexpectedly. The '?.' operator (null-conditional)
         // safely calls .Trim() only if the string is not null.
         // If it IS null, the whole expression returns null instead
         // of throwing a NullReferenceException (crash).
-        // --------------------------------------------------------
+        
         int playerAnswer;
         string input = Console.ReadLine()?.Trim();
         bool isValidInput = int.TryParse(input, out playerAnswer);
 
-        // Keep asking until we get a valid whole number
+        
         while (!isValidInput)
         {
             Console.Write("Please enter a whole number: ");
@@ -195,13 +175,8 @@ void PlayGame(string operation, List<GameRecord> history)
         }
     }
 
-    // --------------------------------------------------------
-    // RESULTS SCREEN
-    // Show score and a performance message based on how they did.
-    // --------------------------------------------------------
     ShowResults(operation, score, totalQuestions);
 
-    // Save completed game to history
     GameRecord record = new GameRecord(operation, score, totalQuestions);
     history.Add(record);
 
@@ -209,9 +184,6 @@ void PlayGame(string operation, List<GameRecord> history)
     Console.ReadKey();
 }
 
-// ============================================================
-// SHOW RESULTS — displayed after each game
-// ============================================================
 void ShowResults(string operation, int score, int total)
 {
     Console.WriteLine("==============================");
@@ -224,19 +196,11 @@ void ShowResults(string operation, int score, int total)
     Console.WriteLine("==============================");
 }
 
-// ============================================================
-// GET RATING — converts a score into a star rating string.
-// This is a pure helper method — it takes inputs and returns
-// a value without modifying anything else in the app.
-// ============================================================
 string GetRating(int score, int total)
 {
-    // Calculate percentage as a decimal (double for precision)
-    // We cast score to double first — otherwise int/int = int
-    // and decimals get lost. Example: 3/5 = 0 as int, 0.6 as double.
     double percentage = (double)score / total * 100;
 
-    // Return a star rating based on percentage
+    
     if (percentage == 100) return "Perfect!";
     if (percentage >= 80)  return "Great!";
     if (percentage >= 60)  return "Good";
@@ -244,9 +208,6 @@ string GetRating(int score, int total)
                            return "Keep Trying!";
 }
 
-// ============================================================
-// GET PERFORMANCE MESSAGE — an encouraging message per score
-// ============================================================
 string GetPerformanceMessage(int score, int total)
 {
     double percentage = (double)score / total * 100;
@@ -258,9 +219,6 @@ string GetPerformanceMessage(int score, int total)
                            return "Don't give up — try again!";
 }
 
-// ============================================================
-// SHOW HISTORY — updated to include rating column
-// ============================================================
 void ShowHistory(List<GameRecord> history)
 {
     Console.Clear();
@@ -275,15 +233,11 @@ void ShowHistory(List<GameRecord> history)
     }
     else
     {
-        // Show total games played as a header
         Console.WriteLine($"  Total games played: {history.Count}\n");
 
-        // 'index' tracks the game number for display purposes.
-        // We use a regular 'for' loop here (instead of foreach)
-        // because we need the position/index of each item.
         for (int i = 0; i < history.Count; i++)
         {
-            GameRecord record = history[i]; // Access item by index like an array
+            GameRecord record = history[i]; 
 
             Console.WriteLine($"  Game #{i + 1}");  // i + 1 so it shows 1, not 0
             Console.WriteLine($"  Date      : {record.DatePlayed:dd MMM yyyy HH:mm}");
@@ -298,9 +252,6 @@ void ShowHistory(List<GameRecord> history)
     Console.ReadKey();
 }
 
-// ============================================================
-// GAMERECORD CLASS — unchanged from Step 2
-// ============================================================
 class GameRecord
 {
     public string Operation { get; set; }
