@@ -1,6 +1,6 @@
 # 🧮 Math Game
 
-A console-based Math Game built with C# as part of the [C# Academy](https://www.thecsharpacademy.com/) curriculum. This project reinforces foundational C# concepts including user input handling, control flow, collections, and console application structure.
+A console-based Math Game built with C#. This project reinforces foundational C# concepts including user input handling, control flow, collections, and console application structure.
 
 ---
 
@@ -22,7 +22,6 @@ A console-based Math Game built with C# as part of the [C# Academy](https://www.
 
 This is a beginner-level C# console application where the player is presented with math questions and earns points for correct answers. The game supports multiple arithmetic operations and maintains a history of previous game sessions during runtime.
 
-This project is part of the **C# Foundation** series from the C# Academy and is ideal for developers who are new to building independent C# applications or looking to reinforce their foundational skills.
 
 ---
 
@@ -117,11 +116,6 @@ Math-Game/
 
 ## 🏆 Challenges
 
-The C# Academy includes optional challenges at the end of this project. These are not required for project approval but are highly recommended to deepen your understanding:
-
-> Completing challenges won't earn extra points, but they will make you a better developer.
-
-Some examples of challenges you may encounter:
 - Add a difficulty setting that adjusts the range of numbers used
 - Implement a timer that limits how long the player has to answer
 - Display the percentage of correct answers at the end of a session
@@ -135,4 +129,3 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-*Built as part of the [C# Academy](https://www.thecsharpacademy.com/) — C# Foundation track.*
