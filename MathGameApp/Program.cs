@@ -292,6 +292,15 @@ int GetNumberOfQuestions()
 
 }
 
+int GetDifficulty()
+{
+    Console.WriteLine("\n  Select difficulty:");
+    Console.WriteLine("  1. Easy   (numbers 1 - 10)");
+    Console.WriteLine("  2. Medium (numbers 1 - 25)");
+    Console.WriteLine("  3. Hard   (numbers 1 - 50)");
+    Console.Write("  Choose: ");
+}
+
 class GameRecord
 {
     public string Operation { get; set; }
