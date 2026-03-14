@@ -265,9 +265,11 @@ int GetNumberOfQuestions()
     Console.WriteLine("\n How many questions would you like? (minimum 5)");
     Console.WriteLine(" Enter a number: ");
 
-    int GetNumberOfQuestions;
+    int numberOfQuestions;
     string input = Console.ReadLine()?.Trim();
-    
+    bool isValid = int.TryParse(input, out numberOfQuestions);
+
+
 }
 
 class GameRecord
