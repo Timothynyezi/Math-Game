@@ -100,9 +100,20 @@ void PlayGame(string operation, List<GameRecord> history)
     Console.Clear();
 
     Random random = new Random();
-    int totalQuestions = 5;
+    
     int score = 0;
 
+    Console.WriteLine("==============================");
+    Console.WriteLine($"       {operation.ToUpper()} GAME");
+    Console.WriteLine("==============================");
+    
+    int totalQuestions = GetNumberOfQuestions();
+
+    Console.Clear();
+    Console.WriteLine("==============================");
+    Console.WriteLine($"       {operation.ToUpper()} GAME");
+    Console.WriteLine("==============================");
+    Console.WriteLine($"  Answer {totalQuestions} questions. Good luck!\n");Console.Clear();
     Console.WriteLine("==============================");
     Console.WriteLine($"       {operation.ToUpper()} GAME");
     Console.WriteLine("==============================");
