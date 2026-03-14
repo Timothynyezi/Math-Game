@@ -309,6 +309,17 @@ int GetDifficulty()
         "3" => 50,
         _   => 25
     };
+
+    string difficultyName = choice switch
+    {
+        "1" => "Easy",
+        "2" => "Hard",
+        "3" => "Hard",
+        _   => "medium"
+    };
+    
+    Console.WriteLine($"Difficulty set to {difficultyName}!");
+    return maxNumber;
 }
 
 class GameRecord
