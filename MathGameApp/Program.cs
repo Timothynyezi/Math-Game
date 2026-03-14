@@ -244,10 +244,13 @@ void ShowHistory(List<GameRecord> history)
         {
             GameRecord record = history[i]; 
 
+            double percentage = (double)record.Score / record.TotalQuestions * 100;
+
             Console.WriteLine($"  Game #{i + 1}");  // i + 1 so it shows 1, not 0
             Console.WriteLine($"  Date      : {record.DatePlayed:dd MMM yyyy HH:mm}");
             Console.WriteLine($"  Operation : {record.Operation}");
             Console.WriteLine($"  Score     : {record.Score} / {record.TotalQuestions}");
+            Console.WriteLine($"  Percentage: {percentage:F1}");
             Console.WriteLine($"  Rating    : {GetRating(record.Score, record.TotalQuestions)}");
             Console.WriteLine("  ----------------------------");
         }
