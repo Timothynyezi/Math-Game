@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.Design.Serialization;
+using System.Diagnostics;
 
 List<GameRecord> gameHistory = new List<GameRecord>();
 bool isRunning = true;
@@ -152,38 +153,49 @@ void PlayGame(string operation, List<GameRecord> history)
             _                => "?"
         };
 
-        
+        int timeLimit = 10;
+
         Console.WriteLine($"  --- Question {i} of {totalQuestions} ---");
+        Console.WriteLine($"You have {timeLimit} seconds to answer");
         Console.Write($"  {firstNumber} {symbol} {secondNumber} = ");
 
-        // NULL-SAFE INPUT HANDLING
-        // Console.ReadLine() can return null if the input stream
-        // ends unexpectedly. The '?.' operator (null-conditional)
-        // safely calls .Trim() only if the string is not null.
-        // If it IS null, the whole expression returns null instead
-        // of throwing a NullReferenceException (crash).
-        
-        int playerAnswer;
+        Stopwatch timer = Stopwatch.StartNew();
+
         string input = Console.ReadLine()?.Trim();
-        bool isValidInput = int.TryParse(input, out playerAnswer);
+        timer.Stop();
 
-        
-        while (!isValidInput)
-        {
-            Console.Write("Please enter a whole number: ");
-            input = Console.ReadLine()?.Trim();
-            isValidInput = int.TryParse(input, out playerAnswer);
-        }
+        double timeTaken = timer.Elapsed.TotalSeconds;
 
-        if (playerAnswer == correctAnswer)
+        if (timeTaken > timeLimit)
         {
-            score++;
-            Console.WriteLine("Correct!\n");
+            Console.WriteLine($"Time's up! The answer was {correctAnswer}\n");
         }
         else
         {
-            Console.WriteLine($"Wrong! The answer was {correctAnswer}\n");
+            int playerAnswer;
+            bool isValidInput = int.TryParse(input, out playerAnswer);
+
+                        
+            while (!isValidInput)
+            {
+                Console.Write("Please enter a whole number: ");
+                input = Console.ReadLine()?.Trim();
+                isValidInput = int.TryParse(input, out playerAnswer);
+            }
+
+            if (playerAnswer == correctAnswer)
+            {
+                score++;
+                Console.WriteLine($"Correct! ({timeTaken:F1} seconds)\n");
+            }
+            else
+            {
+                Console.WriteLine($"Wrong! The answer was {correctAnswer} ({timeTaken:F1}s)\n");
+            }
         }
+        
+
+
     }
 
     ShowResults(operation, score, totalQuestions);
