@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.Design.Serialization;
+
 List<GameRecord> gameHistory = new List<GameRecord>();
 bool isRunning = true;
 
@@ -186,14 +188,17 @@ void PlayGame(string operation, List<GameRecord> history)
 
 void ShowResults(string operation, int score, int total)
 {
+    double percentage = (double)score / total * 100;
     Console.WriteLine("==============================");
     Console.WriteLine("           RESULTS            ");
     Console.WriteLine("==============================");
     Console.WriteLine($"  Operation : {operation}");
     Console.WriteLine($"  Score     : {score} / {total}");
-    Console.WriteLine($"  Rating    : {GetRating(score, total)}");
+    
+    Console.WriteLine($" Percentage :  {percentage:F1}");
+    Console.WriteLine($" Rating     :  {GetRating(score, total)}");
     Console.WriteLine($"  {GetPerformanceMessage(score, total)}");
-    Console.WriteLine("==============================");
+    Console.WriteLine("===============================");
 }
 
 string GetRating(int score, int total)
