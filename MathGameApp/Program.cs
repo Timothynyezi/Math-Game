@@ -269,6 +269,11 @@ int GetNumberOfQuestions()
     string input = Console.ReadLine()?.Trim();
     bool isValid = int.TryParse(input, out numberOfQuestions);
 
+    while (!isValid || numberOfQuestions < 5)
+    {
+        
+    }
+
 
 }
 
