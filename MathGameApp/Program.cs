@@ -299,6 +299,8 @@ int GetDifficulty()
     Console.WriteLine("  2. Medium (numbers 1 - 25)");
     Console.WriteLine("  3. Hard   (numbers 1 - 50)");
     Console.Write("  Choose: ");
+
+    string choice = Console.ReadLine()?.Trim();
 }
 
 class GameRecord
