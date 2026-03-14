@@ -107,18 +107,15 @@ void PlayGame(string operation, List<GameRecord> history)
     Console.WriteLine($"       {operation.ToUpper()} GAME");
     Console.WriteLine("==============================");
     
+    int maxNumber = GetDifficulty();
     int totalQuestions = GetNumberOfQuestions();
 
     Console.Clear();
     Console.WriteLine("==============================");
     Console.WriteLine($"       {operation.ToUpper()} GAME");
     Console.WriteLine("==============================");
-    Console.WriteLine($"  Answer {totalQuestions} questions. Good luck!\n");Console.Clear();
-    Console.WriteLine("==============================");
-    Console.WriteLine($"       {operation.ToUpper()} GAME");
-    Console.WriteLine("==============================");
     Console.WriteLine($"  Answer {totalQuestions} questions. Good luck!\n");
-
+    
     for (int i = 1; i <= totalQuestions; i++)
     {
         int firstNumber;
@@ -127,14 +124,15 @@ void PlayGame(string operation, List<GameRecord> history)
 
         if (operation == "Division")
         {
-            correctAnswer = random.Next(1, 11);
-            secondNumber = random.Next(1, 11);
+            correctAnswer = random.Next(1, maxNumber + 1);
+            secondNumber = random.Next(1, maxNumber + 1);
             firstNumber = correctAnswer * secondNumber;
         }
         else
         {
-            firstNumber = random.Next(1, 21);
-            secondNumber = random.Next(1, 21);
+            firstNumber = random.Next(1, maxNumber + 1);
+            secondNumber = random.Next(1, maxNumber + 1);
+
 
             correctAnswer = operation switch
             {
