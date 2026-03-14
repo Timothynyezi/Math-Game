@@ -260,6 +260,16 @@ void ShowHistory(List<GameRecord> history)
     Console.ReadKey();
 }
 
+int GetNumberOfQuestions()
+{
+    Console.WriteLine("\n How many questions would you like? (minimum 5)");
+    Console.WriteLine(" Enter a number: ");
+
+    int GetNumberOfQuestions;
+    string input = Console.ReadLine()?.Trim();
+    
+}
+
 class GameRecord
 {
     public string Operation { get; set; }
