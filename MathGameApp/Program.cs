@@ -272,6 +272,8 @@ int GetNumberOfQuestions()
     while (!isValid || numberOfQuestions < 5)
     {
         Console.WriteLine("Please enter a whole number of 5 or more: ");
+        input = Console.ReadLine()?.Trim();
+        isValid = int.TryParse(input, out numberOfQuestions);
     }
 
 
