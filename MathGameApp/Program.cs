@@ -301,6 +301,14 @@ int GetDifficulty()
     Console.Write("  Choose: ");
 
     string choice = Console.ReadLine()?.Trim();
+
+    int maxNumber = choice switch
+    {
+        "1" => 10,
+        "2" => 25,
+        "3" => 50,
+        _   => 25
+    };
 }
 
 class GameRecord
