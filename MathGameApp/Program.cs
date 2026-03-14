@@ -276,6 +276,8 @@ int GetNumberOfQuestions()
         isValid = int.TryParse(input, out numberOfQuestions);
     }
 
+    return numberOfQuestions;
+
 
 }
 
